@@ -1,0 +1,38 @@
+echo File: "$(FULL_CURRENT_PATH)"
+echo Extension: "$(EXT_PART)"
+
+if "$(EXT_PART)" == ".java" then
+    echo JAVA FILE DETECTED
+    javac "$(FULL_CURRENT_PATH)"
+    if $(EXITCODE) == 0 then
+        java -cp "$(CURRENT_DIRECTORY)" "$(NAME_PART)"
+    endif
+
+else if "$(EXT_PART)" == ".c" then
+    echo C FILE DETECTED
+    gcc "$(FULL_CURRENT_PATH)" -o "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+    if $(EXITCODE) == 0 then
+        "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+    endif
+
+else if "$(EXT_PART)" == ".cpp" || "$(EXT_PART)" == ".cc" || "$(EXT_PART)" == ".cxx" then
+    echo C++ FILE DETECTED
+    g++ "$(FULL_CURRENT_PATH)" -o "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+    if $(EXITCODE) == 0 then
+        "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+    endif
+
+else if "$(EXT_PART)" == ".rs" then
+    echo RUST FILE DETECTED
+    rustc "$(FULL_CURRENT_PATH)" -o "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+    if $(EXITCODE) == 0 then
+        "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+    endif
+
+else if "$(EXT_PART)" == ".py" then
+    echo PYTHON FILE DETECTED
+    python "$(FULL_CURRENT_PATH)"
+
+else
+    echo Unsupported EXT: $(EXT_PART)
+endif
