@@ -1,0 +1,57 @@
+To run C code using Notepad++, you need to follow these steps:
+
+1. Write Your C Code
+Open Notepad++.
+
+Write or paste your C code in a new file.
+
+Save the file with a .c extension, for example, program.c.
+
+2. Install a C Compiler
+You need a C compiler like GCC. On Windows, you can install:
+
+MinGW (Minimalist GNU for Windows)
+
+TDM-GCC
+
+Or use WSL (Windows Subsystem for Linux) if you have it installed.
+
+3. Configure Notepad++ to Compile and Run C Code
+You can use the NppExec plugin in Notepad++ to compile and run your C programs.
+
+Steps for NppExec Setup:
+Open Notepad++, go to the Plugins menu → Plugins Admin.
+
+Search for NppExec and install it.
+
+Restart Notepad++ after installation.
+
+Create a Compile and Run Script:
+Go to Plugins → NppExec → Execute….
+
+Enter this script (adjust paths if necessary; here assuming MinGW is installed and gcc is in your PATH):
+
+bash
+gcc "$(FULL_CURRENT_PATH)" -o "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+if $(EXITCODE) == 0
+    cmd /c "$(CURRENT_DIRECTORY)\$(NAME_PART).exe"
+endif
+Click Save and name it e.g., Compile and Run C.
+
+Now, you can run this script from Plugins → NppExec → Execute Script.
+
+4. Run Your Code
+Open your .c file.
+
+Use Plugins → NppExec → your saved script (Compile and Run C).
+
+The console inside Notepad++ will show compilation and program output.
+
+Notes:
+Make sure gcc is accessible from your command prompt (added to PATH).
+
+You can also set a shortcut for the NppExec script for convenience.
+
+If code has errors, compiler messages will appear in the console.
+
+This way, you can write, compile, and run C code all from Notepad++ efficiently. If you want, I can guide you through installing MinGW or setting PATH variables specifically.
